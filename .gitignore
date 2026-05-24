@@ -1,0 +1,9 @@
+bin/*
+!bin/.gitkeep
+logs/*
+!logs/.gitkeep
+repos/*
+!repos/.gitkeep
+etc/app.ini
+versions.env
+*.local

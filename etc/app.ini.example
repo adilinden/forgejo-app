@@ -1,0 +1,35 @@
+[DEFAULT]
+RUN_USER = git
+RUN_MODE = prod
+
+[server]
+DOMAIN           = forgejo.cstl.one
+ROOT_URL         = https://forgejo.cstl.one/
+HTTP_PORT        = 3000
+SSH_DOMAIN       = forgejo.cstl.one
+SSH_PORT         = 22
+START_SSH_SERVER = true
+SSH_LISTEN_PORT  = 22
+
+[database]
+DB_TYPE  = postgres
+HOST     = 127.0.0.1:5432
+NAME     = forgejo
+USER     = forgejo
+PASSWD   = CHANGEME
+
+[repository]
+ROOT = /opt/forgejo-app/repos
+
+[log]
+MODE      = file
+LEVEL     = info
+ROOT_PATH = /opt/forgejo-app/logs
+
+[security]
+INSTALL_LOCK   = true
+SECRET_KEY     = CHANGEME
+INTERNAL_TOKEN = CHANGEME
+
+[service]
+DISABLE_REGISTRATION = true
