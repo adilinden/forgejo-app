@@ -13,18 +13,22 @@ if [[ -f "${REPO_DIR}/versions.env" ]]; then
   source "${REPO_DIR}/versions.env"
 fi
 
-FORGEJO_URL="https://codeberg.org/forgejo/forgejo/releases/download/v${FORGEJO_VERSION}/forgejo-${FORGEJO_VERSION}-linux-amd64"
+FORGEJO_ASSET="forgejo-${FORGEJO_VERSION}-linux-amd64"
+FORGEJO_URL="https://codeberg.org/forgejo/forgejo/releases/download/v${FORGEJO_VERSION}/${FORGEJO_ASSET}"
 FORGEJO_SHA256_URL="${FORGEJO_URL}.sha256"
 
 echo "==> Downloading Forgejo ${FORGEJO_VERSION}"
-curl -fLo "${BIN_DIR}/forgejo" "${FORGEJO_URL}"
-curl -fLo "${BIN_DIR}/forgejo.sha256" "${FORGEJO_SHA256_URL}"
+curl -fL --http1.1 --retry 3 --retry-delay 5 -o "${BIN_DIR}/forgejo.new" "${FORGEJO_URL}"
+curl -fL --http1.1 -o "${BIN_DIR}/forgejo.new.sha256" "${FORGEJO_SHA256_URL}"
 
 echo "==> Verifying checksum"
-(cd "${BIN_DIR}" && sed "s/forgejo-${FORGEJO_VERSION}-linux-amd64/forgejo/" forgejo.sha256 | sha256sum -c)
-rm "${BIN_DIR}/forgejo.sha256"
+(cd "${BIN_DIR}" && sed "s/${FORGEJO_ASSET}/forgejo.new/" forgejo.new.sha256 | sha256sum -c)
+rm "${BIN_DIR}/forgejo.new.sha256"
 
-chmod +x "${BIN_DIR}/forgejo"
+echo "==> Replacing binary"
+mv "${BIN_DIR}/forgejo.new" "${BIN_DIR}/forgejo"
+chown root:root "${BIN_DIR}/forgejo"
+chmod 755 "${BIN_DIR}/forgejo"
 
 echo "==> Installing systemd unit"
 cp "${REPO_DIR}/systemd/forgejo.service" "${SYSTEMD_UNIT}"
