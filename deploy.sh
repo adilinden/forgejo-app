@@ -25,7 +25,6 @@ echo "==> Verifying checksum"
 rm "${BIN_DIR}/forgejo.sha256"
 
 chmod +x "${BIN_DIR}/forgejo"
-chown -R git:git "${REPO_DIR}"
 
 echo "==> Installing systemd unit"
 cp "${REPO_DIR}/systemd/forgejo.service" "${SYSTEMD_UNIT}"
