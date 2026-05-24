@@ -4,13 +4,12 @@ RUN_MODE = prod
 APP_DATA_PATH = /opt/forgejo-app/data
 
 [server]
-DOMAIN           = forgejo.cstl.one
-ROOT_URL         = https://forgejo.cstl.one/
+DOMAIN           = forgejo.example.com
+ROOT_URL         = https://forgejo.example.com/
 HTTP_PORT        = 3000
-SSH_DOMAIN       = forgejo.cstl.one
+SSH_DOMAIN       = ssh.forgejo.example.com
 SSH_PORT         = 22
 START_SSH_SERVER = false
-SSH_LISTEN_PORT  = 22
 
 [database]
 DB_TYPE  = postgres

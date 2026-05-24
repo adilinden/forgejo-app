@@ -6,7 +6,7 @@ BIN_DIR="${REPO_DIR}/bin"
 SYSTEMD_UNIT="/etc/systemd/system/forgejo.service"
 
 # Default version — update here and commit to upgrade
-FORGEJO_VERSION="10.0.0"
+FORGEJO_VERSION="15.0.2"
 
 # Source local overrides if present (gitignored, never committed)
 if [[ -f "${REPO_DIR}/versions.env" ]]; then
