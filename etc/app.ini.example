@@ -1,6 +1,7 @@
 [DEFAULT]
 RUN_USER = git
 RUN_MODE = prod
+APP_DATA_PATH = /opt/forgejo-app/data
 
 [server]
 DOMAIN           = forgejo.cstl.one
